@@ -12,7 +12,7 @@ export function TradeTags({ direction, expiresAt, optionType }: TradeTagsProps) 
   const isBullish = direction === "CALL"
 
   return (
-    <div className="flex flex-wrap gap-2 mb-8">
+    <div className="flex flex-wrap gap-2 mb-4 md:mb-8">
       <span
         className={cn(
           "px-3 py-1 text-[11px] font-bold rounded-md glass-border flex items-center gap-1",

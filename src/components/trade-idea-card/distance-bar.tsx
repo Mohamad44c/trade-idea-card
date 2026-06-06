@@ -7,7 +7,7 @@ export function DistanceBar({ distancePercent, progressPercent }: DistanceBarPro
   const clamped = Math.min(100, Math.max(0, progressPercent))
 
   return (
-    <div className="space-y-2 mt-6">
+    <div className="space-y-2 mt-4 md:mt-6">
       <div className="flex justify-between text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">
         <span>Distance</span>
         <span className="text-on-surface">{distancePercent.toFixed(1)}% away from target</span>

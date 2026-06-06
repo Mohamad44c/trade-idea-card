@@ -12,7 +12,7 @@ export function PotentialReturn({
   riskReward,
 }: PotentialReturnProps) {
   return (
-    <div className="bg-surface-container/50 rounded-xl p-4 glass-border mb-6 flex items-center justify-between">
+    <div className="bg-surface-container/50 rounded-xl p-4 glass-border mb-4 md:mb-6 flex items-center justify-between">
       <div>
         <p className="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">
           Potential Return

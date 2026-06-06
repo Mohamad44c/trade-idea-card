@@ -14,12 +14,12 @@ interface TradeIdeaCardProps {
 
 export function TradeIdeaCard({ trade }: TradeIdeaCardProps) {
   return (
-    <div className="w-full max-w-[420px] flex flex-col h-[calc(100svh-14rem)] md:h-[calc(100svh-10rem)] bg-surface-card rounded-[24px] glass-border shadow-2xl relative overflow-hidden">
-      {/* Header — fixed height */}
-      <div className="p-gutter pb-4 shrink-0">
+    <div className="w-full max-w-[420px] max-h-[calc(100svh-14rem)] md:max-h-[calc(100svh-10rem)] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden bg-surface-card rounded-[24px] glass-border shadow-2xl relative">
+      {/* Header */}
+      <div className="p-4 md:p-gutter pb-3 md:pb-4">
         <AssetHeader asset={trade.asset} isLive={trade.isLive} />
 
-        <h1 className="font-sans font-semibold text-on-surface text-2xl leading-tight mb-6">
+        <h1 className="font-sans font-semibold text-on-surface text-xl md:text-2xl leading-tight mb-3 md:mb-6">
           {trade.question}
         </h1>
 
@@ -40,16 +40,16 @@ export function TradeIdeaCard({ trade }: TradeIdeaCardProps) {
         />
       </div>
 
-      {/* Chart — grows to fill whatever space remains */}
-      <div className="flex-1 min-h-0">
+      {/* Chart — explicit viewport-relative height avoids flex cascade issues */}
+      <div style={{ height: "clamp(100px, 20svh, 180px)" }}>
         <MiniChart
           data={trade.chartData}
           targetPrice={trade.targetPrice}
         />
       </div>
 
-      {/* Footer — fixed height */}
-      <div className="p-gutter pt-6 shrink-0">
+      {/* Footer */}
+      <div className="p-4 md:p-gutter pt-4 md:pt-6">
         <PotentialReturn
           defaultStake={trade.defaultStake}
           potentialPayout={trade.potentialPayout}

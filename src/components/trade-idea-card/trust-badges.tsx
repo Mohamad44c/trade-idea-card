@@ -2,7 +2,7 @@ import { Shield, Clock } from "lucide-react"
 
 export function TrustBadges() {
   return (
-    <div className="mt-4 flex items-center justify-center gap-3">
+    <div className="mt-3 md:mt-4 flex items-center justify-center gap-3">
       <div className="flex items-center gap-1">
         <Shield className="w-3.5 h-3.5 text-on-surface-variant" />
         <span className="text-[11px] text-on-surface-variant">No liquidation risk</span>
