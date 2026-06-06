@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trade Idea Card
+
+A production-ready options trading UI card built with Next.js 16, React 19, TypeScript, Tailwind v4, and shadcn/ui. Streams live BTC price data over WebSocket from Binance's public feed.
+
+---
+
+## Features
+
+- **Live price feed** — WebSocket connection to Binance (`@ticker` stream), auto-reconnects on disconnect
+- **Sparkline chart** — SVG price chart with a dashed strike-price line and animated glow dot
+- **CALL / PUT support** — direction-aware colour theming (bullish green / bearish coral)
+- **Responsive layout** — desktop sidebar + fixed top nav; mobile bottom navigation bar
+- **Dark-mode only** — Material Design 3 colour system as Tailwind v4 design tokens
+- **Zero third-party chart library** — chart rendered with raw SVG
+
+---
+
+## Tech Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript 5 |
+| Styling | Tailwind v4 + tw-animate-css |
+| Components | shadcn/ui (radix-nova) |
+| Icons | lucide-react |
+| Fonts | Geist (headings) + Inter (body) via `next/font` |
+| Live data | Binance WebSocket public API |
+
+---
+
+## Project Structure
+
+```
+src/
+  app/
+    globals.css          # Design tokens (@theme), animations, base styles
+    layout.tsx           # Root layout — fonts, dark class
+    page.tsx             # Entry page
+  components/
+    layout/
+      top-nav.tsx        # Fixed header
+      sidebar.tsx        # Desktop left sidebar
+      bottom-nav.tsx     # Mobile bottom bar
+      background-decoration.tsx
+    trade-idea-card/
+      index.tsx          # Card root — composes all sub-components
+      asset-header.tsx   # Asset icon + symbol + live badge
+      trade-tags.tsx     # Direction / expiry / type chips
+      price-display.tsx  # Current price + % change
+      distance-bar.tsx   # Progress bar toward strike target
+      mini-chart.tsx     # SVG sparkline (client)
+      potential-return.tsx
+      buy-button.tsx     # CTA with loading state (client)
+      trust-badges.tsx
+      live-wrapper.tsx   # Merges live ticker data into static TradeIdea (client)
+  hooks/
+    use-binance-ticker.ts  # WebSocket hook — price, chart data, connection state
+  types/
+    trade.ts             # TradeIdea, TradeAsset, ChartDataPoint
+  data/
+    sample-trade.ts      # BTC fixture used as the static base
+docs/
+  COMPONENTS.md          # Full component reference and token table
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Data Model
 
-## Learn More
+The card is driven by a single `TradeIdea` object (see `src/types/trade.ts`). Pass any conforming object to render a different trade:
 
-To learn more about Next.js, take a look at the following resources:
+```tsx
+import { LiveTradeIdeaCard } from "@/components/trade-idea-card/live-wrapper"
+import type { TradeIdea } from "@/types/trade"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+const myTrade: TradeIdea = {
+  id: "eth-touch-4k",
+  asset: { symbol: "ETH", name: "Ethereum", brandColor: "#627EEA" },
+  question: "ETH above $4,000 in 3 days?",
+  direction: "CALL",
+  optionType: "Touch",
+  expiresAt: "Jun 9, 2026",
+  currentPrice: 3820,
+  priceChangePct: 1.8,
+  targetPrice: 4000,
+  distancePercent: 4.7,
+  progressPercent: 55,
+  defaultStake: 100,
+  potentialPayout: 185,
+  riskReward: "1:1.85",
+  isLive: true,
+  chartData: [],
+}
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<LiveTradeIdeaCard base={myTrade} />
+```
 
-## Deploy on Vercel
+`LiveTradeIdeaCard` overwrites `currentPrice`, `priceChangePct`, `chartData`, `distancePercent`, `progressPercent`, and `isLive` with real-time values once the WebSocket connects. All other fields come from `base`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Live Data
+
+The `useBinanceTicker(symbol)` hook connects to:
+
+```
+wss://stream.binance.com:9443/ws/{symbol}@ticker
+```
+
+It returns `{ price, priceChangePct, openPrice, chartData, isConnected, error }` and:
+
+- Samples a new chart point every **5 seconds** (configurable via `CHART_SAMPLE_INTERVAL_S`)
+- Keeps a rolling window of **60 points** (`MAX_CHART_POINTS`)
+- Auto-reconnects after **3 seconds** on disconnect (`RECONNECT_DELAY_MS`)
+- Falls back to static `base` data until the first price arrives
+
+No API key required — Binance's public ticker stream is unauthenticated.
+
+---
+
+## Credits
+
+Designed with [Google Stitch](https://stitch.withgoogle.com)
+
+Prompt generated by [Claude](https://claude.ai)
