@@ -47,7 +47,7 @@ export function MiniChart({ data, targetPrice }: MiniChartProps) {
   const dotY = points[points.length - 1].y
 
   return (
-    <div className="relative h-48 w-full overflow-hidden bg-surface-container-low/30">
+    <div className="relative h-full w-full overflow-hidden bg-surface-container-low/30">
       {/* Strike line — clamped to chart bounds; arrow hints when target is off-chart */}
       <div
         className="absolute left-0 w-full flex items-center z-10"
