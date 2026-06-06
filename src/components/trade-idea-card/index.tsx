@@ -14,7 +14,7 @@ interface TradeIdeaCardProps {
 
 export function TradeIdeaCard({ trade }: TradeIdeaCardProps) {
   return (
-    <div className="w-full max-w-[420px] flex flex-col max-h-[calc(100svh-14rem)] md:max-h-[calc(100svh-10rem)] bg-surface-card rounded-[24px] glass-border shadow-2xl relative overflow-hidden">
+    <div className="w-full max-w-[420px] flex flex-col h-[calc(100svh-14rem)] md:h-[calc(100svh-10rem)] bg-surface-card rounded-[24px] glass-border shadow-2xl relative overflow-hidden">
       {/* Header — fixed height */}
       <div className="p-gutter pb-4 shrink-0">
         <AssetHeader asset={trade.asset} isLive={trade.isLive} />
@@ -41,7 +41,7 @@ export function TradeIdeaCard({ trade }: TradeIdeaCardProps) {
       </div>
 
       {/* Chart — grows to fill whatever space remains */}
-      <div className="flex-1 min-h-[80px]">
+      <div className="flex-1 min-h-0">
         <MiniChart
           data={trade.chartData}
           targetPrice={trade.targetPrice}
