@@ -40,6 +40,27 @@ export function useBinanceTicker(symbol: string): TickerData {
   const lastChartSampleRef = useRef(0)
   const mountedRef = useRef(true)
 
+  // Seed chart with recent 1-minute klines so the sparkline is populated immediately
+  useEffect(() => {
+    let cancelled = false
+    const url = `https://api.binance.com/api/v3/klines?symbol=${symbol.toUpperCase()}&interval=1m&limit=${MAX_CHART_POINTS}`
+
+    fetch(url)
+      .then((r) => r.json())
+      .then((klines: [number, string, string, string, string, ...unknown[]][]) => {
+        if (cancelled) return
+        const points: ChartDataPoint[] = klines.map((k, i) => ({
+          index: i,
+          value: parseFloat(k[4]), // close price
+        }))
+        chartIndexRef.current = points.length
+        setState((prev) => ({ ...prev, chartData: points }))
+      })
+      .catch(() => {}) // silent fail — WebSocket data still arrives
+
+    return () => { cancelled = true }
+  }, [symbol])
+
   const connect = useCallback(() => {
     if (!mountedRef.current) return
 

@@ -37,7 +37,7 @@ export function LiveTradeIdeaCard({ base }: LiveTradeIdeaCardProps) {
       priceChangePct,
       distancePercent,
       progressPercent,
-      chartData: chartData.length > 1 ? chartData : base.chartData,
+      chartData: chartData.length > 0 ? chartData : base.chartData,
       isLive: ticker.isConnected,
     }
   }, [base, ticker])
