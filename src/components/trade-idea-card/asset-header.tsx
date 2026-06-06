@@ -10,10 +10,15 @@ export function AssetHeader({ asset, isLive }: AssetHeaderProps) {
     <div className="flex justify-between items-start mb-6">
       <div className="flex gap-2 items-center">
         <div
-          className="w-8 h-8 rounded-full flex items-center justify-center p-1.5 text-white text-xs font-black"
-          style={{ backgroundColor: asset.brandColor }}
+          className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center text-white text-xs font-black"
+          style={asset.logoUrl ? undefined : { backgroundColor: asset.brandColor }}
         >
-          {asset.symbol.slice(0, 1)}
+          {asset.logoUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={asset.logoUrl} alt={asset.name} className="w-full h-full object-cover" />
+          ) : (
+            <span className="p-1.5">{asset.symbol.slice(0, 1)}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <span className="font-bold text-on-surface font-sans text-xl leading-none">

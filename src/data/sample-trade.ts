@@ -6,6 +6,7 @@ export const sampleBtcTrade: TradeIdea = {
     symbol: "BTC",
     name: "Bitcoin",
     brandColor: "#F7931A",
+    logoUrl: "/icons/btc.svg",
   },
   question: "BTC above $105,000 in 7 days?",
   direction: "CALL",

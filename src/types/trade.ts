@@ -6,6 +6,8 @@ export interface TradeAsset {
   name: string
   /** Hex brand color for the asset icon background, e.g. "#F7931A" for BTC */
   brandColor: string
+  /** Optional path to a logo image in /public, e.g. "/icons/btc.svg" */
+  logoUrl?: string
 }
 
 export interface ChartDataPoint {
