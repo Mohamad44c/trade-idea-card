@@ -10,7 +10,7 @@ export function DistanceBar({ distancePercent, progressPercent }: DistanceBarPro
     <div className="space-y-2 mt-6">
       <div className="flex justify-between text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">
         <span>Distance</span>
-        <span className="text-white">{distancePercent.toFixed(1)}% away from target</span>
+        <span className="text-on-surface">{distancePercent.toFixed(1)}% away from target</span>
       </div>
       <div className="h-2 w-full bg-surface-container rounded-full overflow-hidden p-px">
         <div

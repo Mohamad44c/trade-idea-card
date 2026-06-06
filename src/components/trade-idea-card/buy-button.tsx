@@ -24,7 +24,7 @@ export function BuyButton({ direction }: BuyButtonProps) {
       className={cn(
         "w-full font-black py-4 rounded-xl transition-all duration-200 active:scale-95 text-sm uppercase tracking-wider",
         isBullish
-          ? "bg-bullish-green hover:bg-primary-fixed-dim text-on-primary-fixed shadow-[0_0_30px_rgba(0,255,136,0.2)]"
+          ? "bg-bullish-green hover:bg-primary-fixed-dim text-on-primary shadow-[0_0_30px_rgba(0,255,136,0.2)]"
           : "bg-bearish-coral hover:brightness-110 text-white shadow-[0_0_30px_rgba(255,77,106,0.2)]",
         loading && "opacity-70 cursor-not-allowed",
       )}

@@ -13,7 +13,7 @@ export function PriceDisplay({ currentPrice, priceChangePct }: PriceDisplayProps
 
   return (
     <div className="flex items-baseline gap-3 mb-2">
-      <span className="text-white font-bold font-sans text-[32px] leading-10 tracking-tight">
+      <span className="text-on-surface font-bold font-sans text-[32px] leading-10 tracking-tight">
         {formatted}
       </span>
       <span

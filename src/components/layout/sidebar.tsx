@@ -86,7 +86,7 @@ export function Sidebar() {
         type="button"
         className={cn(
           "mt-auto",
-          "bg-bullish-green text-[#00210c] font-black",
+          "bg-bullish-green text-on-primary font-black",
           "py-3 rounded-lg",
           "hover:brightness-110 active:scale-95 transition-all",
           "text-sm"

@@ -1,5 +1,6 @@
 import { Bell, Wallet } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { ThemeToggle } from "./theme-toggle"
 
 const navLinks = [
   { label: "Markets", active: true },
@@ -44,6 +45,8 @@ export function TopNav() {
 
       {/* Right side */}
       <div className="flex items-center gap-3">
+        <ThemeToggle />
+
         <button
           type="button"
           aria-label="Notifications"

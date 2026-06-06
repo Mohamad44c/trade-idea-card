@@ -16,7 +16,7 @@ export function AssetHeader({ asset, isLive }: AssetHeaderProps) {
           {asset.symbol.slice(0, 1)}
         </div>
         <div className="flex flex-col">
-          <span className="font-bold text-white font-sans text-xl leading-none">
+          <span className="font-bold text-on-surface font-sans text-xl leading-none">
             {asset.symbol}
           </span>
           <span className="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest mt-1">

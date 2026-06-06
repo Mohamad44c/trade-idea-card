@@ -19,7 +19,7 @@ export function TradeIdeaCard({ trade }: TradeIdeaCardProps) {
       <div className="p-gutter pb-4">
         <AssetHeader asset={trade.asset} isLive={trade.isLive} />
 
-        <h1 className="font-sans font-semibold text-white text-2xl leading-tight mb-6">
+        <h1 className="font-sans font-semibold text-on-surface text-2xl leading-tight mb-6">
           {trade.question}
         </h1>
 

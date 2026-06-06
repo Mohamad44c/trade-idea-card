@@ -61,16 +61,16 @@ export function MiniChart({ data, targetPrice }: MiniChartProps) {
       >
         <defs>
           <linearGradient id={gradientId} x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#00FF88" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#00FF88" stopOpacity="0" />
+            <stop offset="0%" style={{ stopColor: "var(--color-bullish-green)", stopOpacity: 0.3 }} />
+            <stop offset="100%" style={{ stopColor: "var(--color-bullish-green)", stopOpacity: 0 }} />
           </linearGradient>
         </defs>
 
         <path d={areaPath} fill={`url(#${gradientId})`} />
-        <path d={linePath} fill="none" stroke="#00FF88" strokeWidth="2.5" strokeLinejoin="round" />
+        <path d={linePath} fill="none" style={{ stroke: "var(--color-bullish-green)" }} strokeWidth="2.5" strokeLinejoin="round" />
 
-        <circle cx={dotX} cy={dotY} r="5" fill="#00FF88" />
-        <circle cx={dotX} cy={dotY} r="10" fill="none" stroke="#00FF88" strokeOpacity="0.5" strokeWidth="1">
+        <circle cx={dotX} cy={dotY} r="5" style={{ fill: "var(--color-bullish-green)" }} />
+        <circle cx={dotX} cy={dotY} r="10" fill="none" style={{ stroke: "var(--color-bullish-green)" }} strokeOpacity="0.5" strokeWidth="1">
           <animate attributeName="r" values="8;14;8" dur="2s" repeatCount="indefinite" />
           <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="2s" repeatCount="indefinite" />
         </circle>
