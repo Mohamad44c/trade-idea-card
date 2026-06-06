@@ -1,26 +1,97 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* === Surfaces === */
+  --color-background: #0A0A0F;
+  --color-surface: #131318;
+  --color-surface-dim: #131318;
+  --color-surface-bright: #39383e;
+  --color-surface-card: #13131A;
+  --color-surface-container: #1f1f25;
+  --color-surface-container-low: #1b1b20;
+  --color-surface-container-high: #2a292f;
+  --color-surface-container-highest: #35343a;
+  --color-surface-container-lowest: #0e0e13;
+  --color-surface-variant: #35343a;
+
+  /* === Primary === */
+  --color-primary: #f1ffef;
+  --color-primary-container: #00ff88;
+  --color-primary-fixed: #60ff99;
+  --color-primary-fixed-dim: #00e479;
+  --color-on-primary: #003919;
+  --color-on-primary-container: #007139;
+  --color-on-primary-fixed: #00210c;
+  --color-on-primary-fixed-variant: #005228;
+
+  /* === On-colors === */
+  --color-on-surface: #e4e1e9;
+  --color-on-surface-variant: #b9cbb9;
+  --color-on-background: #e4e1e9;
+
+  /* === Brand === */
+  --color-bullish-green: #00FF88;
+  --color-bearish-coral: #FF4D6A;
+  --color-border-glass: rgba(255, 255, 255, 0.08);
+
+  /* === Border Radius === */
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* === Spacing === */
+  --spacing-base: 0.5rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-container-padding-mobile: 1.25rem;
+  --spacing-container-padding-desktop: 2.5rem;
+  --spacing-section-gap: 4rem;
+
+  /* === Typography === */
+  --font-sans: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-inter: var(--font-inter-var), "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* === Custom Keyframes === */
+@keyframes pulse-green {
+  0%   { box-shadow: 0 0 0 0   rgba(0, 255, 136, 0.7); }
+  70%  { box-shadow: 0 0 0 6px rgba(0, 255, 136, 0);   }
+  100% { box-shadow: 0 0 0 0   rgba(0, 255, 136, 0);   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .animate-pulse-green {
+    animation: pulse-green 2s infinite;
+  }
+
+  .glass-border {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .font-inter {
+    font-family: var(--font-inter);
+  }
+
+  .font-geist {
+    font-family: var(--font-sans);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background-color: rgba(0, 255, 136, 0.3);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-on-surface);
+    font-family: var(--font-inter);
+  }
 }

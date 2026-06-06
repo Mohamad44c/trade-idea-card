@@ -1,0 +1,38 @@
+import type { TradeIdea } from "@/types/trade"
+
+export const sampleBtcTrade: TradeIdea = {
+  id: "btc-touch-105k-jun13",
+  asset: {
+    symbol: "BTC",
+    name: "Bitcoin",
+    brandColor: "#F7931A",
+  },
+  question: "BTC above $105,000 in 7 days?",
+  direction: "CALL",
+  optionType: "Touch",
+  expiresAt: "Jun 13, 2026",
+  currentPrice: 98432.1,
+  priceChangePct: 2.4,
+  targetPrice: 105000,
+  distancePercent: 6.2,
+  progressPercent: 72,
+  defaultStake: 100,
+  potentialPayout: 218,
+  riskReward: "1:2.18",
+  isLive: true,
+  chartData: [
+    { index: 0,  value: 95200 },
+    { index: 1,  value: 94800 },
+    { index: 2,  value: 95600 },
+    { index: 3,  value: 96100 },
+    { index: 4,  value: 95800 },
+    { index: 5,  value: 96900 },
+    { index: 6,  value: 97200 },
+    { index: 7,  value: 96800 },
+    { index: 8,  value: 97600 },
+    { index: 9,  value: 97900 },
+    { index: 10, value: 97400 },
+    { index: 11, value: 98000 },
+    { index: 12, value: 98432 },
+  ],
+}
